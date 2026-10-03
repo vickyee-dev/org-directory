@@ -1,0 +1,66 @@
+// Organization Contact Directory — database schema
+// Originally authored for the ICTA Internship Program (09-JUL-2025).
+// Manages industries, the organizations that belong to them, and each organization's contacts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Industry {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  organizations Organization[]
+}
+
+model Organization {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  industryId  Int?
+  industry    Industry? @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  website     String?
+  logoUrl     String?
+  foundedDate DateTime?
+  taxId       String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  contacts Contact[]
+
+  @@index([name])
+  @@index([industryId])
+  @@index([isActive])
+}
+
+model Contact {
+  id                Int          @id @default(autoincrement())
+  organizationId    Int
+  organization      Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  firstName         String
+  lastName          String
+  jobTitle          String?
+  department        String?
+  isPrimaryContact  Boolean      @default(false)
+  notes             String?
+  email             String?
+  officePhoneNumber String?
+  mobilePhoneNumber String?
+  isActive          Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([isActive])
+  @@index([lastName, firstName])
+}

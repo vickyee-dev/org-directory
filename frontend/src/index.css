@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-slate-50 text-slate-800;
+  }
+  /* Keyboard focus ring for everything interactive */
+  :where(a, button, input, select, textarea):focus-visible {
+    @apply outline-2 outline-offset-2 outline-indigo-500;
+  }
+}
