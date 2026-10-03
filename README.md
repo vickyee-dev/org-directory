@@ -21,6 +21,20 @@ Originally built as an ICTA Internship Program project (July 2025); this version
 - **UX** — responsive layout with mobile drawer, toasts, confirmation dialogs, loading / empty / error states, server-side validation errors shown next to fields.
 - **Safe CSV export** — proper escaping, UTF-8 BOM for Excel, and protection against spreadsheet formula injection.
 
+## Screenshots
+
+### Dashboard
+![Dashboard](dashboard.png)
+
+### Organizations
+![Organizations](organizations.png)
+
+### Contacts
+![Contacts](contacts.png)
+
+### Industries
+![Industries](industries.png)
+
 ## Project structure
 
 ```
